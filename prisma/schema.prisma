@@ -1,0 +1,91 @@
+generator photon {
+  provider = "photonjs"
+}
+
+generator nexus_prisma {
+  provider = "nexus-prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://df_admin:admin@192.168.0.74/dreamfactory?schema=prisma"
+}
+
+model User {
+  id          String   @default(cuid()) @id
+  createdAt   DateTime @default(now())
+  createdBy   String?
+  updatedAt   DateTime @updatedAt
+  updatedBy   String?
+  email       String   @unique
+  password    String
+  name        String
+  isAdmin     Boolean  @default(false)
+  isActive    Boolean  @default(false)
+  firstName   String
+  lastName    String
+  lastLogin   DateTime @default(now())
+  tokenActive Boolean  @default(false)
+  roles       Access[]
+}
+
+model Entity {
+  id        String    @default(cuid()) @id
+  createdAt DateTime  @default(now())
+  createdBy String?
+  updatedAt DateTime  @updatedAt
+  updatedBy String?
+  name      String
+  identity  String
+  expenses  Expense[]
+  users     Access[]
+}
+
+
+enum UserRole {
+  Agent
+  Employee
+  HR
+  Developer
+}
+
+model Access {
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  createdBy String?
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+  user      User
+  entity    Entity
+  role      UserRole
+}
+
+enum ExpenseCategory {
+  Food
+  Travel
+}
+
+model Expense {
+  id          String          @default(cuid()) @id
+  createdAt   DateTime        @default(now())
+  createdBy   String?
+  updatedAt   DateTime        @updatedAt
+  updatedBy   String?
+  entity      Entity
+  category    ExpenseCategory
+  description String?
+  net         Float?
+  vat         Float?
+  gross       Float
+  document    Document?       @relation(references: id)
+}
+
+model Document {
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  createdBy String?
+  name      String
+  mimetype  String?
+  ext       String
+  expense   Expense
+}

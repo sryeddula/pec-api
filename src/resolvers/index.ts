@@ -9,6 +9,7 @@ import { ExpenseCategory } from './enum/ExpenseCategory'
 import {UserEntity} from './object/UserEntity'
 import {UserEntityAccess} from './object/UserEntityAccess'
 import {Access} from './object/Access'
+import {Document} from './object/Document'
 
 
 
@@ -16,6 +17,7 @@ import {Access} from './object/Access'
 export const resolvers = {
 //UserRole,
   // ExpenseCategory,
+
   Access,
   UserEntityAccess,
   UserEntity,
@@ -24,5 +26,6 @@ export const resolvers = {
   User,
   Entity,
   Mutation,
+  Document,
   AuthPayload
 }

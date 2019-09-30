@@ -61,3 +61,4 @@ typings/
 .next
 
 src/schema.graphql
+prisma/migrations

@@ -10,9 +10,9 @@ export const Expense = objectType({
         t.model.updatedAt()
         t.field('category', { type: 'ExpenseCategory'})
         t.model.description()
-        t.model.documentId()
         t.model.net()
         t.model.vat()
         t.model.gross()
+        t.model.document()
     },
 })

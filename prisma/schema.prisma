@@ -2,10 +2,6 @@ generator photon {
   provider = "photonjs"
 }
 
-generator nexus_prisma {
-  provider = "nexus-prisma"
-}
-
 datasource db {
   provider = "postgresql"
   url      = "postgresql://df_admin:admin@192.168.0.74/dreamfactory?schema=prisma"
